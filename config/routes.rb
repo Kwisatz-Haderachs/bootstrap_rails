@@ -1,16 +1,19 @@
 Rails.application.routes.draw do
+  get 'reviews/new'
+
   resources :restaurants do
+    resources :reviews, only: [ :new, :create ]
     collection do
       get 'top', to:"restaurants#top" # /restaurants/top
     end
     member do
       get 'chef', to:"restaurants#chef" #/restaurants/:id/chef
     end
-    resources :reviews, only: [ :new, :create ]
   end
 
-  # resources :restaurants do
-  # end
+  resources: :reviews, only: [:show]
+
+
 
     #  get 'restaurants/top', to: 'restaurants#top'
 
